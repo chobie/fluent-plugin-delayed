@@ -1,1 +1,32 @@
 = Delayed output plugin for Fluent event collector
+
+== Archtecture
+
+if events has future time. it will be delayed insert.
+
+ now: 2011-10-22 10:00:00
+            |
+ event{
+  time: 2011-10-22 10:00:05,
+  ...
+ }
+            |
+ [fluentd-delayed-output]
+      waiting 5 seconds (2011-10-22 10:00:05)
+            |
+      [emit the event]
+
+== Restrictions
+
+this plugin targets easily implementation.
+it has a risk of disappear events if you specify long delay time.
+
+== Quick Start
+
+ $ rake
+ $ gem install pkg/fluent-plugin-delayed-0.0.1.gem
+
+Source repository:: http://github.com/chobie/fluent-plugin-delayed
+Author:: Shuhei Tanuma
+Copyright:: (c) 2011 Shuhei Tanuma
+License:: Apache License, Version 2.0
