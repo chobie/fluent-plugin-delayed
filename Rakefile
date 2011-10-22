@@ -23,9 +23,10 @@ rescue LoadError
 end
 
 Rake::TestTask.new(:test) do |t|
-  #Todo
+  t.test_files = Dir['test/plugin/*.rb']
+  t.ruby_opts = ['-rubygems'] if defined? Gem
+  t.ruby_opts << '-I.'
 end
 
 task :default => [:build]
-
 task :default => [:build, :gemspec]
