@@ -1,18 +1,21 @@
 = Delayed output plugin for Fluent event collector
 
-== Archtecture
+== Architecture
 
 if events has future time. it will be delayed insert.
+Basically, we don't have to modify event time.  delayed insert
+looks very useful in some cases. imagine it!
 
  now: 2011-10-22 10:00:00
             |
  event{
-  time: 2011-10-22 10:00:05,
+  time: 2011-10-22 10:00:05, # 5 seconds future
   ...
  }
             |
  [fluentd-delayed-output]
-      waiting 5 seconds (2011-10-22 10:00:05)
+      waiting 5 seconds
+ (Coolio buffering events and fire when specified time has come.)
             |
       [emit the event]
 
@@ -23,7 +26,7 @@ it has a risk of disappear events if you specify long delay time.
 
 == Quick Start
 
- $ rake
+ $ rake build
  $ gem install pkg/fluent-plugin-delayed-0.0.1.gem
 
 Source repository:: http://github.com/chobie/fluent-plugin-delayed
