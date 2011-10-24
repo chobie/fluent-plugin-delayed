@@ -28,6 +28,7 @@ class DelayedEvent < ::Coolio::TimerWatcher
   
   def on_timer
     @output.emit(@tag, @event, @chain)
+    detach
   end  
 end
 
